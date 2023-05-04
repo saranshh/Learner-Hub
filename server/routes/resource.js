@@ -7,6 +7,7 @@ const isAuth = require('../middlewares/is-auth')
 const classroomController = require('../controllers/resource');
 const resource = require('../models/resource');
 const discussion = require('../models/discussion');
+const forum = require('../models/forum')
 
 router.post('/createResource', classroomController.createResource);
 router.post('/getResources', isAuth, classroomController.getResources);
@@ -24,7 +25,7 @@ router.get("/ByUserName", async (req, res) => {
     const keyword = req.query.creatorName
         ? { "creatorName": { $regex: req.query.creatorName, $options: "i" } }
         : {};
-    const users = await discussion.find(keyword);
+    const users = await forum.find(keyword);
     res.send(users);
 }); 
 

@@ -19,8 +19,12 @@ const Dashboard = () => {
   const [adminEmail, setAdminEmail] = useState();
   const [owned, setOwned] = useState([]);
 
+  const [posts, setPosts] = useState([]);
+
   const [enrolled, setEnrolled] = useState([]);
+
   console.log(enrolled, "kjndkjasdj")
+  
   const [loading,setLoading] = useState(false);
   const storeData = useSelector(selectUserData);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -60,7 +64,7 @@ const Dashboard = () => {
   const handleSearch = async () => {
     try {
       const data = await axios.get(`http://localhost:5000/resources/ByUserName?creatorName=${search?.name}`)
-      setEnrolled(data.data);
+      setPosts(data.data)
       console.log(data.data, "kjncdks")
       return Promise.resolve(data);
     } catch (error) {
@@ -90,7 +94,7 @@ const Dashboard = () => {
                   <Banner/>
                 </div>
                 <div className="row m-3 mx-0 mx-md-3">
-                  <Forum  posts={enrolled} />
+                  <Forum setPosts ={setPosts} posts={posts} />
                 </div>
               </div>
             </div>

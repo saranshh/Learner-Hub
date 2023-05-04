@@ -12,10 +12,10 @@ import axios from 'axios';
 import db, { storage } from '../../firebase';
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-const Discussion = () => {
+const Discussion = ({setPosts, posts}) => {
     
     const [discussionInput, setDiscussionInput] = useState("");
-    const [posts, setPosts] = useState([]);
+    
     const [fileInput, setFileInput] = useState();
     const userData = useSelector(selectUserData);
     let TextArea = useRef(null);
@@ -168,7 +168,7 @@ const Discussion = () => {
                 ) : (
                     <div className="Posts">
                         {
-                            posts.map(post => {
+                            posts?.map(post => {
                                 return (
                                     <div key={post._id} className="content-box px-3 py-2 my-3">
                                         <div className="d-flex">
