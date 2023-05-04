@@ -17,5 +17,8 @@
   "scripts": {
     "start": "nodemon server/app.js",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install npm && run build"
+  },
+  "devDependencies": {
+    "sass": "^1.62.1"
   }
 }

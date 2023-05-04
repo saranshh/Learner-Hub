@@ -252,3 +252,31 @@ body, #root, .app {
   white-space: nowrap;
   width: 1px;
 }
+
+.search-Button{
+  gap: 10px;
+}
+
+#searchButton{
+  cursor: pointer;
+  border-radius: 15px;
+  size: 10rem !important;
+}
+
+.btn-submit{
+  color: white;
+  padding: .3rem 1rem;
+  border-radius: .5rem;
+  background-color: #166eda;
+}
+
+.searchInput input{
+  padding: .3rem .8rem;
+  border-radius: .5rem;
+  border-color: #000000;
+}
+
+.search-text{
+  font-size: 1.2rem;
+  font-weight: bold;
+}

@@ -14,10 +14,13 @@ import { selectUserData} from '../../reduxSlices/authSlice';
 
 
 const Dashboard = () => {
+  const [search, setSearch] = useState();
   const [adminName, setAdminName] = useState();
   const [adminEmail, setAdminEmail] = useState();
   const [owned, setOwned] = useState([]);
+
   const [enrolled, setEnrolled] = useState([]);
+  console.log(enrolled, "kjndkjasdj")
   const [loading,setLoading] = useState(false);
   const storeData = useSelector(selectUserData);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -53,6 +56,18 @@ const Dashboard = () => {
       setLoading(false);
     }
   }, [storeData.token]);
+
+  const handleSearch = async () => {
+    try {
+      const data = await axios.get(`http://localhost:5000/resources/ByUserName?creatorName=${search?.name}`)
+      setEnrolled(data.data);
+      console.log(data.data, "kjncdks")
+      return Promise.resolve(data);
+    } catch (error) {
+      return Promise.reject({ error })
+    }
+  }
+
   return (
     <>
       {
@@ -69,13 +84,13 @@ const Dashboard = () => {
               <MobileHeader/>
             </div>
             <div className="row mx-0">
-                <FAQ setLoading={setLoading} owned={owned} enrolled={enrolled} />
+                <FAQ handleSearch={handleSearch} setSearch={setSearch} setLoading={setLoading} owned={owned} enrolled={enrolled} />
               <div className="col-12 col-md-9 width-80 padding-sx-0 margin-sx-0 pos">
                 <div className="row mx-0 m-t-0 m-md-3">
                   <Banner/>
                 </div>
                 <div className="row m-3 mx-0 mx-md-3">
-                  <Forum setLoading={setLoading} owned={owned} enrolled={enrolled} />
+                  <Forum  posts={enrolled} />
                 </div>
               </div>
             </div>

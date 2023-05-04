@@ -17,6 +17,7 @@ import CreateClassroom from '../Classroom/CreateClassroom';
 import JoinClassroom from '../Classroom/JoinClassroom';
 
 const Dashboard = () => {
+  const [search, setSearch] = useState();
   const [owned, setOwned] = useState([]);
   const [enrolled, setEnrolled] = useState([]);
   const [loading,setLoading] = useState(false);
@@ -54,6 +55,18 @@ const Dashboard = () => {
       setLoading(false);
     }
   }, [storeData.token]);
+
+  const handleSearch = async () => {
+    try {
+      const data = await axios.get(`http://localhost:5000/resources/ByName?name=${search?.name}`)
+      setEnrolled(data.data);
+      return Promise.resolve(data);
+    } catch (error) {
+      return Promise.reject({ error })
+    }
+  }
+
+
   return (
     <>
       {
@@ -70,7 +83,7 @@ const Dashboard = () => {
               <MobileHeader/>
             </div>
             <div className="row mx-0">
-                <SideDash setLoading={setLoading} owned={owned} enrolled={enrolled} />
+                <SideDash setSearch={setSearch} handleSearch={handleSearch} />
               <div className="col-12 col-md-9 width-80 padding-sx-0 margin-sx-0 pos">
                 <div className="row mx-0 m-t-0 m-md-3">
                   <Banner/>

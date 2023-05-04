@@ -14,6 +14,7 @@ import LoginModal from '../partials/LoginModal/LoginModal';
 import Testimonial from './Testimonial';
 import Offline from './Offline';
 import Contact from './Contact';
+import FooterNav from '../partials/FooterNav/FooterNav';
 
 const Home = () => {
   const userData = useSelector(selectUserData);
@@ -49,6 +50,8 @@ const Home = () => {
       <Offline/>
       <Testimonial/>
       <Contact/>
+
+      <FooterNav/>
       {/* <div className="Footer mt-3">
         <div className="row p-0 m-0">
             <div className="col-12 col-md-6 d-flex justify-content-center justify-content-md-start px-0 py-2">
